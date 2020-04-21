@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Brazilian Peppertree Tracker</string>
+    <string name="tree_spotter_label">Brazilian Pepper Tree Spotter </string>
+    <string name="invasive_species_map_label">Invasive Species Map</string>
+    <string name="generalMessageError">Unable to access page. Please try again later.</string>
+    <string name="reload">Reload</string>
+</resources>

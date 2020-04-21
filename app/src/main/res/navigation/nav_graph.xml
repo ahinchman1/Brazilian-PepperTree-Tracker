@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/invasiveSpeciesMapFragment">
+
+    <fragment
+        android:id="@+id/invasiveSpeciesMapFragment"
+        android:name="com.deg47.brazilianpeppertreetracker.map.InvasiveSpeciesMapFragment"
+        android:label="@string/tree_spotter_label"
+        tools:layout="@layout/fragment_spotter">
+
+        <action
+            android:id="@+id/action_go_to_error"
+            app:destination="@id/errorFragment"/>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/treeSpotterFragment"
+        android:name="com.deg47.brazilianpeppertreetracker.spotter.TreeSpotterFragment"
+        android:label="@string/tree_spotter_label"
+        tools:layout="@layout/fragment_spotter">
+
+        <action
+            android:id="@+id/action_go_to_error"
+            app:destination="@id/errorFragment"/>
+    </fragment>
+
+
+    <!-- Error Fragment TODO explain how to make the label dynamic-->
+
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.deg47.brazilianpeppertreetracker.error.ErrorFragment"
+        tools:layout="@layout/fragment_error">
+
+        <action
+            android:id="@+id/action_go_to_invasive_species_map"
+            app:destination="@id/invasiveSpeciesMapFragment"/>
+
+        <action
+            android:id="@+id/action_go_to_tree_spotter"
+            app:destination="@id/treeSpotterFragment"/>
+
+    </fragment>
+
+</navigation>

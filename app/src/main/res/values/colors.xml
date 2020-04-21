@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#529E89</color>
+    <color name="colorPrimaryDark">#B6A980</color>
+    <color name="colorAccent">#B6A980</color>
+    <color name="app_background">#FAF8E3</color>
+
+    <!-- Placeholder -->
+    <color name="text_error_message">#87364550</color>
+    <color name="text_error_button">#ffffff</color>
+    <color name="background_error_button">#E05F5E</color>
+</resources>
