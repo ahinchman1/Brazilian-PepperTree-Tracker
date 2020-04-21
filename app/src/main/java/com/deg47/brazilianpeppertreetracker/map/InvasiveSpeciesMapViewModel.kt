@@ -19,7 +19,6 @@ sealed class InvasiveSpeciesMapViewState {
 }
 
 class InvasiveSpeciesMapViewModel(
-    private val conferenceRepository: ConferenceRepository,
     private val navigator: Navigator,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
@@ -27,16 +26,15 @@ class InvasiveSpeciesMapViewModel(
     private val _viewState = MutableLiveData<InvasiveSpeciesMapViewState>()
     val viewState: LiveData<InvasiveSpeciesMapViewState> = _viewState
 
-    fun onMapReady() {
+    init {
+        onMapReady()
+    }
+
+    private fun onMapReady() {
         viewModelScope.launch(ioDispatcher) {
-            when (val conference = conferenceRepository.getConference()) {
-                is Result.Success -> withContext(Dispatchers.Main) {
-                    _viewState.value = InvasiveSpeciesMapViewState.Content(conference.data.venues)
-                }
-                is Result.Failure -> withContext(Dispatchers.Main) {
-                    Timber.d("$TAG Failed to retrieve conference. Cause of error: ${conference.error?.message}")
-                    navigator.navigateToError(from = Screen.INVASIVE_SPECIES_MAP)
-                }
+            withContext(Dispatchers.Main) {
+                Timber.d("$TAG Failed to retrieve Google maps.")
+                navigator.navigateToError(from = Screen.INVASIVE_SPECIES_MAP)
             }
         }
     }

@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/treeSpotterFragment"
-        android:name="com.deg47.brazilianpeppertreetracker.spotter.TreeSpotterFragment"
+        android:name="com.deg47.brazilianpeppertreetracker.spotter.SpotterFragment"
         android:label="@string/tree_spotter_label"
         tools:layout="@layout/fragment_spotter">
 

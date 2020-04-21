@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.deg47.brazilianpeppertreetracker.navigator.Navigator
 
 @Suppress("UNCHECKED_CAST")
-class TreeSpotterViewModelFactory constructor(
+class SpotterViewModelFactory constructor(
     private val navigator: Navigator
 ) : ViewModelProvider.NewInstanceFactory() {
 

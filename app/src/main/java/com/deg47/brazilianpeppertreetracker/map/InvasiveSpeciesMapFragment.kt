@@ -18,10 +18,7 @@ class InvasiveSpeciesMapFragment: Fragment() {
     }
 
     private val viewModel by viewModels<InvasiveSpeciesMapViewModel> {
-        InvasiveSpeciesMapViewModelFactory(
-            navigator = Navigator(navController),
-
-        )
+        InvasiveSpeciesMapViewModelFactory(navigator = Navigator(navController, resources))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +35,7 @@ class InvasiveSpeciesMapFragment: Fragment() {
     private fun render(viewState: InvasiveSpeciesMapViewState) {
         when (viewState) {
             is InvasiveSpeciesMapViewState.Loading -> { }
-            is InvasiveSpeciesMapViewState.Content -> {
-
-            }
+            is InvasiveSpeciesMapViewState.Content -> { }
         }
     }
 

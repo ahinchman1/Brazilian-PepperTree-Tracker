@@ -15,7 +15,7 @@ import timber.log.Timber
 
 sealed class SpotterViewState {
     object Loading : SpotterViewState()
-    data class Content(val spottedSpottedTrees: List<SpottedTreeModel>) : SpotterViewState()
+    data class Content(val spottedSpottedTrees: List<TreeSpotterModel>) : SpotterViewState()
 }
 
 class SpotterViewModel(
@@ -33,27 +33,21 @@ class SpotterViewModel(
     private fun loadSpotters() {
         viewModelScope.launch(ioDispatcher) {
             withContext(Dispatchers.Main) {
-                when (val conference = conferencesRepository.getConference()) {
-                    is Result.Success -> getSpeakerModels(conference.data)
-                    is Result.Failure -> navigator.navigateToError(from = Screen.SPOTTER)
+                when (val treeSpotters = getTreeSpotters()) {
+                    is Result.Success -> withContext(Dispatchers.Main) {
+                        SpotterViewState.Content(treeSpotters.data)
+                    }
+                    is Result.Failure -> withContext(Dispatchers.Main) {
+                        Timber.d("$TAG Error: Unable to load tree spotters.")
+                        navigator.navigateToError(from = Screen.SPOTTER)
+                    }
                 }
             }
         }
     }
 
-    private fun getSpeakerModels(conference: SpottedTreeModel) {
-        when(val speakers = getSpeakers(conference)) {
-            is Result.Success -> _viewState.value =
-                SpotterViewState.Content(speakers.data)
-            is Result.Failure -> navigator.navigateToError(from = Screen.SPOTTER)
-        }
-    }
-
-    private fun getSpeakers(): Result<List<SpottedTreeModel>> {
-        return when {
-            conference.speakers.isNullOrEmpty() -> Timber.d("$TAG: Conference speaker list is empty.")
-            else ->  Result.Success(conference.speakers.toSpeakerModels())
-        }
+    private fun getTreeSpotters(): Result<List<TreeSpotterModel>> {
+        return Result.Success(listOf())
     }
 
     companion object {
