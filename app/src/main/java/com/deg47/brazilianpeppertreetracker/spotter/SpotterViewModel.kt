@@ -35,7 +35,7 @@ class SpotterViewModel(
             withContext(Dispatchers.Main) {
                 when (val treeSpotters = getTreeSpotters()) {
                     is Result.Success -> withContext(Dispatchers.Main) {
-                        SpotterViewState.Content(treeSpotters.data)
+                        _viewState.value = SpotterViewState.Content(treeSpotters.data)
                     }
                     is Result.Failure -> withContext(Dispatchers.Main) {
                         Timber.d("$TAG Error: Unable to load tree spotters.")

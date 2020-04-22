@@ -21,7 +21,7 @@
         android:id="@+id/invasiveSpeciesMapFragment"
         android:name="com.deg47.brazilianpeppertreetracker.map.InvasiveSpeciesMapFragment"
         android:label="@string/tree_spotter_label"
-        tools:layout="@layout/fragment_spotter">
+        tools:layout="@layout/fragment_invasive_species_map">
 
         <action
             android:id="@+id/action_go_to_error"
@@ -32,7 +32,7 @@
         android:id="@+id/treeSpotterFragment"
         android:name="com.deg47.brazilianpeppertreetracker.spotter.SpotterFragment"
         android:label="@string/tree_spotter_label"
-        tools:layout="@layout/fragment_spotter">
+        tools:layout="@layout/fragment_pepper_tree_spotter">
 
         <action
             android:id="@+id/action_go_to_error"

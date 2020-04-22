@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <ProgressBar
-        android:id="@+id/pepper_tree_spotter_loader"
+        android:id="@+id/invasive_species_map_loader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

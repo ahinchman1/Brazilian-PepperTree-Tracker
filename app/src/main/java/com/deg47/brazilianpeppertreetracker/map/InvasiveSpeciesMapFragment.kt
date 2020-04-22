@@ -10,6 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.deg47.brazilianpeppertreetracker.R
 import com.deg47.brazilianpeppertreetracker.navigator.Navigator
+import com.deg47.brazilianpeppertreetracker.setVisibleOrGone
+import kotlinx.android.synthetic.main.fragment_invasive_species_map.*
+import kotlinx.android.synthetic.main.fragment_pepper_tree_spotter.*
 
 class InvasiveSpeciesMapFragment: Fragment() {
 
@@ -34,12 +37,14 @@ class InvasiveSpeciesMapFragment: Fragment() {
 
     private fun render(viewState: InvasiveSpeciesMapViewState) {
         when (viewState) {
-            is InvasiveSpeciesMapViewState.Loading -> { }
-            is InvasiveSpeciesMapViewState.Content -> { }
+            is InvasiveSpeciesMapViewState.Loading -> {
+                invasive_species_map_loader.visibility = setVisibleOrGone(true)
+                map.visibility = setVisibleOrGone(false)
+            }
+            is InvasiveSpeciesMapViewState.Content -> {
+                invasive_species_map_loader.visibility = setVisibleOrGone(false)
+                map.visibility = setVisibleOrGone(true)
+            }
         }
-    }
-
-    companion object {
-        fun newInstance(): InvasiveSpeciesMapFragment = InvasiveSpeciesMapFragment()
     }
 }

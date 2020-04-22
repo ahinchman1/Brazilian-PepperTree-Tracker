@@ -38,11 +38,11 @@ class SpotterFragment: Fragment() {
         when (viewState) {
             is SpotterViewState.Loading -> {
                 pepper_tree_spotter_loader.visibility = setVisibleOrGone(true)
-                pepper_tree_spotter_recycler_view.visibility = setVisibleOrGone(false)
+                pepper_tree_spotter_text.visibility = setVisibleOrGone(false)
             }
             is SpotterViewState.Content -> {
                 pepper_tree_spotter_loader.visibility = setVisibleOrGone(false)
-                pepper_tree_spotter_recycler_view.visibility = setVisibleOrGone(true)
+                pepper_tree_spotter_text.visibility = setVisibleOrGone(true)
             }
         }
     }
