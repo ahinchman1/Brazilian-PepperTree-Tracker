@@ -11,5 +11,5 @@ class InvasiveSpeciesMapViewModelFactory constructor(
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>) =
-        SpotterViewModel(navigator) as T
+        InvasiveSpeciesMapViewModel(navigator) as T
 }

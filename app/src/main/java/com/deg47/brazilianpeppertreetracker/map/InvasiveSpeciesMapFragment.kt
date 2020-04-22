@@ -14,7 +14,7 @@ import com.deg47.brazilianpeppertreetracker.navigator.Navigator
 class InvasiveSpeciesMapFragment: Fragment() {
 
     private val navController by lazy {
-        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_container)
+        Navigation.findNavController(requireActivity(), R.id.fragment_container)
     }
 
     private val viewModel by viewModels<InvasiveSpeciesMapViewModel> {
@@ -39,4 +39,7 @@ class InvasiveSpeciesMapFragment: Fragment() {
         }
     }
 
+    companion object {
+        fun newInstance(): InvasiveSpeciesMapFragment = InvasiveSpeciesMapFragment()
+    }
 }

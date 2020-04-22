@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:id="@+id/group_navigation"
-        android:checkableBehavior="single">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_drawer_menu">
 
-        <item android:id="@+id/treeSpotterFragment"
-            android:title="@string/tree_spotter_label"/>
+    <item android:id="@+id/treeSpotterFragment"
+        android:title="@string/tree_spotter_label"/>
 
-        <item android:id="@+id/invasiveSpeciesMapFragment"
-            android:title="@string/invasive_species_map_label"/>
-    </group>
-
-    <group android:id="@+id/group_conference_navigation"
-        android:enabled="false"
-        android:checkableBehavior="single"/>
+    <item android:id="@+id/invasiveSpeciesMapFragment"
+        android:title="@string/invasive_species_map_label"/>
 </menu>

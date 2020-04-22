@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_pepper_tree_spotter.*
 class SpotterFragment: Fragment() {
 
     private val navController by lazy {
-        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_container)
+        Navigation.findNavController(requireActivity(), R.id.fragment_container)
     }
 
     private val viewModel by viewModels<SpotterViewModel> {

@@ -22,7 +22,7 @@ class ErrorFragment: Fragment() {
     }
 
     private val viewModel by viewModels<ErrorViewModel> {
-        ErrorViewModelFactory(navigator = Navigator(navController))
+        ErrorViewModelFactory(navigator = Navigator(navController, resources))
     }
 
     override fun onCreateView(

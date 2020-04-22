@@ -1,14 +1,14 @@
-package com.deg47.brazilianpeppertreetracker.error
+package com.deg47.brazilianpeppertreetracker
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.deg47.brazilianpeppertreetracker.navigator.Navigator
 
 @Suppress("UNCHECKED_CAST")
-class ErrorViewModelFactory constructor(
+class MainActivityViewModelFactory(
     private val navigator: Navigator
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>) =
-        ErrorViewModel(navigator) as T
+        MainActivityViewModel(navigator) as T
 }
