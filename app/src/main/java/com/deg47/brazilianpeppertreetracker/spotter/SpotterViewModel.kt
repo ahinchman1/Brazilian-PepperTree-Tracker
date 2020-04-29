@@ -32,15 +32,13 @@ class SpotterViewModel(
 
     private fun loadSpotters() {
         viewModelScope.launch(ioDispatcher) {
-            withContext(Dispatchers.Main) {
-                when (val treeSpotters = getTreeSpotters()) {
-                    is Result.Success -> withContext(Dispatchers.Main) {
-                        _viewState.value = SpotterViewState.Content(treeSpotters.data)
-                    }
-                    is Result.Failure -> withContext(Dispatchers.Main) {
-                        Timber.d("$TAG Error: Unable to load tree spotters.")
-                        navigator.navigateToError(from = Screen.SPOTTER)
-                    }
+            when (val treeSpotters = getTreeSpotters()) {
+                is Result.Success -> withContext(Dispatchers.Main) {
+                    _viewState.value = SpotterViewState.Content(treeSpotters.data)
+                }
+                is Result.Failure -> withContext(Dispatchers.Main) {
+                    Timber.d("$TAG Error: Unable to load tree spotters.")
+                    navigator.navigateToError(from = Screen.SPOTTER)
                 }
             }
         }

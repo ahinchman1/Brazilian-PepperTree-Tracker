@@ -12,7 +12,6 @@ import com.deg47.brazilianpeppertreetracker.R
 import com.deg47.brazilianpeppertreetracker.navigator.Navigator
 import com.deg47.brazilianpeppertreetracker.setVisibleOrGone
 import kotlinx.android.synthetic.main.fragment_invasive_species_map.*
-import kotlinx.android.synthetic.main.fragment_pepper_tree_spotter.*
 
 class InvasiveSpeciesMapFragment: Fragment() {
 

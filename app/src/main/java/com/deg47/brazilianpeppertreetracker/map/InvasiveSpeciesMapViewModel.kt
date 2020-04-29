@@ -27,6 +27,7 @@ class InvasiveSpeciesMapViewModel(
     val viewState: LiveData<InvasiveSpeciesMapViewState> = _viewState
 
     init {
+        _viewState.value = InvasiveSpeciesMapViewState.Loading
         onMapReady()
     }
 

@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -30,8 +29,6 @@ class MainActivity : SingleFragmentActivity() {
         MainActivityViewModelFactory(navigator = Navigator(navController, resources))
     }
 
-    override fun createFragment(): Fragment = LoadingFragment.newInstance()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,7 +41,14 @@ class MainActivity : SingleFragmentActivity() {
 
     private fun render(viewState: MainActivityViewState) {
         when (viewState) {
-            is MainActivityViewState.Content -> { }
+            is MainActivityViewState.Loading -> {
+                loader.visibility = setVisibleOrGone(true)
+                fragment_container.visibility = setVisibleOrGone(false)
+            }
+            is MainActivityViewState.Content -> {
+                loader.visibility = setVisibleOrGone(false)
+                fragment_container.visibility = setVisibleOrGone(true)
+            }
         }
     }
 

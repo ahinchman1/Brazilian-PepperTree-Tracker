@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 sealed class ErrorViewState {
-    object Loading : ErrorViewState()
     data class Content(val navigator: Navigator) : ErrorViewState()
 }
 
