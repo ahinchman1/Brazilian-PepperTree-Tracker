@@ -16,12 +16,10 @@ import timber.log.Timber
 sealed class SpotterViewState {
     object Loading : SpotterViewState()
     data class Content(val spottedSpottedTrees: List<TreeSpotterModel>) : SpotterViewState()
+    object Error: SpotterViewState()
 }
 
-class SpotterViewModel(
-    private val navigator: Navigator,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : ViewModel() {
+class SpotterViewModel : ViewModel() {
 
     private val _viewState = MutableLiveData<SpotterViewState>()
     val viewState: LiveData<SpotterViewState> = _viewState
@@ -31,14 +29,14 @@ class SpotterViewModel(
     }
 
     private fun loadSpotters() {
-        viewModelScope.launch(ioDispatcher) {
+        viewModelScope.launch(Dispatchers.IO) {
             when (val treeSpotters = getTreeSpotters()) {
                 is Result.Success -> withContext(Dispatchers.Main) {
                     _viewState.value = SpotterViewState.Content(treeSpotters.data)
                 }
                 is Result.Failure -> withContext(Dispatchers.Main) {
                     Timber.d("$TAG Error: Unable to load tree spotters.")
-                    navigator.navigateToError(from = Screen.SPOTTER)
+                    _viewState.value = SpotterViewState.Error
                 }
             }
         }

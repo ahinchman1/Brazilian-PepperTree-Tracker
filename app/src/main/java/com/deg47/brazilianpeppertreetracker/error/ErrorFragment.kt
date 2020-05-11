@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import com.deg47.brazilianpeppertreetracker.MainActivity
 import com.deg47.brazilianpeppertreetracker.R
 import com.deg47.brazilianpeppertreetracker.navigator.Navigator
 import com.deg47.brazilianpeppertreetracker.navigator.Navigator.Companion.PREVIOUS_DESTINATION_ID
@@ -17,13 +18,8 @@ import kotlinx.android.synthetic.main.fragment_error.*
 
 class ErrorFragment: Fragment() {
 
-    private val navController by lazy {
-        Navigation.findNavController(requireActivity(), R.id.fragment_container)
-    }
-
-    private val viewModel by viewModels<ErrorViewModel> {
-        ErrorViewModelFactory(navigator = Navigator(navController, resources))
-    }
+    private val navigator by lazy { (requireActivity() as MainActivity).navigator }
+    private val viewModel by viewModels<ErrorViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,8 +41,6 @@ class ErrorFragment: Fragment() {
     private fun render(viewState: ErrorViewState) {
         when (viewState) {
             is ErrorViewState.Content -> {
-                val navigator = viewState.navigator
-
                 error_button.setOnClickListener {
                     activity?.title?.let { _ ->
                         when (requireArguments().getInt(PREVIOUS_DESTINATION_ID, 0)) {

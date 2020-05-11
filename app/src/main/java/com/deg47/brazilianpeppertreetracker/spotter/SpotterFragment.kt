@@ -8,31 +8,28 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import com.deg47.brazilianpeppertreetracker.MainActivity
 import com.deg47.brazilianpeppertreetracker.R
 import com.deg47.brazilianpeppertreetracker.navigator.Navigator
+import com.deg47.brazilianpeppertreetracker.navigator.Screen
 import com.deg47.brazilianpeppertreetracker.setVisibleOrGone
 import kotlinx.android.synthetic.main.fragment_pepper_tree_spotter.*
 
 class SpotterFragment: Fragment() {
 
-    private val navController by lazy {
-        Navigation.findNavController(requireActivity(), R.id.fragment_container)
-    }
+    private val navigator by lazy { (requireActivity() as MainActivity).navigator }
+    private val viewModel by viewModels<SpotterViewModel>()
 
-    private val viewModel by viewModels<SpotterViewModel> {
-        SpotterViewModelFactory(navigator = Navigator(navController, resources))
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_pepper_tree_spotter, container, false)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         viewModel.viewState.observe(this, Observer<SpotterViewState> { viewState ->
             viewState?.let { render(it) }
         })
     }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_pepper_tree_spotter, container, false)
 
     private fun render(viewState: SpotterViewState) {
         when (viewState) {
@@ -44,6 +41,7 @@ class SpotterFragment: Fragment() {
                 pepper_tree_spotter_loader.visibility = setVisibleOrGone(false)
                 pepper_tree_spotter_text.visibility = setVisibleOrGone(true)
             }
+            is SpotterViewState.Error -> navigator.navigateToError(from = Screen.SPOTTER)
         }
     }
 }

@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.deg47.brazilianpeppertreetracker.navigator.Navigator
@@ -17,7 +17,12 @@ class MainActivity : SingleFragmentActivity() {
         @LayoutRes
         get() = R.layout.activity_main
 
-    private val navController by lazy { findNavController(R.id.fragment_container) }
+    private val navController by lazy {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+        navHostFragment.navController
+    }
+    val navigator by lazy { Navigator(navController, resources) }
 
     private val appBarConfigurations by lazy {
         AppBarConfiguration
@@ -25,9 +30,7 @@ class MainActivity : SingleFragmentActivity() {
             .setDrawerLayout(drawerLayout)
             .build()
     }
-    private val viewModel by viewModels<MainActivityViewModel> {
-        MainActivityViewModelFactory(navigator = Navigator(navController, resources))
-    }
+    private val viewModel by viewModels<MainActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +51,7 @@ class MainActivity : SingleFragmentActivity() {
             is MainActivityViewState.Content -> {
                 loader.visibility = setVisibleOrGone(false)
                 fragment_container.visibility = setVisibleOrGone(true)
+                navigator.navigateToInvasiveSpeciesMap()
             }
         }
     }

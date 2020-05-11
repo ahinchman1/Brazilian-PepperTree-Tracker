@@ -16,12 +16,10 @@ import timber.log.Timber
 sealed class InvasiveSpeciesMapViewState {
     object Loading : InvasiveSpeciesMapViewState()
     data class Content(val invasiveSpecies: InvasiveSpeciesLocations) : InvasiveSpeciesMapViewState()
+    object Error: InvasiveSpeciesMapViewState()
 }
 
-class InvasiveSpeciesMapViewModel(
-    private val navigator: Navigator,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : ViewModel() {
+class InvasiveSpeciesMapViewModel : ViewModel() {
 
     private val _viewState = MutableLiveData<InvasiveSpeciesMapViewState>()
     val viewState: LiveData<InvasiveSpeciesMapViewState> = _viewState
@@ -32,10 +30,11 @@ class InvasiveSpeciesMapViewModel(
     }
 
     private fun onMapReady() {
-        viewModelScope.launch(ioDispatcher) {
+        viewModelScope.launch(Dispatchers.IO) {
+            // do some stuff
             withContext(Dispatchers.Main) {
                 Timber.d("$TAG Failed to retrieve Google maps.")
-                navigator.navigateToError(from = Screen.INVASIVE_SPECIES_MAP)
+                _viewState.value = InvasiveSpeciesMapViewState.Error
             }
         }
     }

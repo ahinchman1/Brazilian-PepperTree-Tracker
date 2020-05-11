@@ -11,26 +11,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 sealed class ErrorViewState {
-    data class Content(val navigator: Navigator) : ErrorViewState()
+    object Content : ErrorViewState()
 }
 
-class ErrorViewModel(
-    private val navigator: Navigator,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : ViewModel() {
-
+class ErrorViewModel : ViewModel() {
     private val _viewState = MutableLiveData<ErrorViewState>()
     val viewState: LiveData<ErrorViewState> = _viewState
 
     init {
-        loadErrorContent()
-    }
-
-    private fun loadErrorContent() {
-        viewModelScope.launch(ioDispatcher) {
-            withContext(Dispatchers.Main) {
-                _viewState.value = ErrorViewState.Content(navigator)
-            }
-        }
+        _viewState.value = ErrorViewState.Content
     }
 }
